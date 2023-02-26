@@ -1,0 +1,24 @@
+.FeedbackOptions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.feedbackBtn {
+  width: 150px;
+  height: 30px;
+  font-size: large;
+  background-color: darkkhaki;
+  font-weight: 600;
+  border-radius: 10px;
+  border-color: transparent;
+  color: white;
+}
+
+.feedbackBtn:first-child {
+  background-color: dodgerblue;
+}
+
+.feedbackBtn:last-child {
+  background-color: dimgray;
+}

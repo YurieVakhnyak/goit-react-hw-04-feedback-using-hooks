@@ -1,0 +1,14 @@
+.Section {
+  background-color: aliceblue;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  min-height: 500px;
+  text-align: center;
+}
+
+.feedbackTitle {
+  margin-bottom: 40px;
+  font-size: xx-large;
+  font-weight: 900;
+  color: mediumseagreen;
+}
