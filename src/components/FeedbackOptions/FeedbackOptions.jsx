@@ -1,27 +1,20 @@
 import css from './FeedbackOptions.module.css';
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+  // const { good, neutral, bad } = options;
   return (
     <div className={css.FeedbackOptions}>
-      <button
-        className={css.feedbackBtn}
-        name={options[0].toLowerCase()}
-        onClick={onLeaveFeedback}
-      >
-        {options[0]}
+      <button className={css.feedbackBtn} name="good" onClick={onLeaveFeedback}>
+        Good
       </button>
       <button
         className={css.feedbackBtn}
-        name={options[1].toLowerCase()}
+        name="neutral"
         onClick={onLeaveFeedback}
       >
-        {options[1]}
+        Neutral
       </button>
-      <button
-        className={css.feedbackBtn}
-        name={options[2].toLowerCase()}
-        onClick={onLeaveFeedback}
-      >
-        {options[2]}
+      <button className={css.feedbackBtn} name="bad" onClick={onLeaveFeedback}>
+        Bad
       </button>
     </div>
   );

@@ -1,63 +1,51 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { Section } from './Section/Section.jsx';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions.jsx';
 import { Statistics } from './Statistics/Statistics.jsx';
 import css from './App.module.css';
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.onLeaveFeedback = this.onLeaveFeedback.bind(this);
-    this.state = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    };
-  }
+export default function App() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-  onLeaveFeedback = evt => {
+  const onLeaveFeedback = evt => {
     const stateName = evt.target.name;
-    const { good, neutral, bad } = this.state;
+
     if (stateName === 'good') {
-      this.setState({ [stateName]: good + 1 });
+      setGood(good + 1);
     } else if (stateName === 'neutral') {
-      this.setState({ [stateName]: neutral + 1 });
+      setNeutral(neutral + 1);
     } else {
-      this.setState({ [stateName]: bad + 1 });
+      setBad(bad + 1);
     }
   };
 
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
+  const countTotalFeedback = () => {
     return good + neutral + bad;
   };
 
-  countPositiveFeedbackPercentage = () => {
-    const { good, neutral, bad } = this.state;
+  const countPositiveFeedbackPercentage = () => {
     return Math.floor((good / (good + neutral + bad)) * 100);
   };
 
-  render() {
-    const { good, neutral, bad } = this.state;
-
-    return (
-      <Section title="Please, leave your Feedback">
-        <FeedbackOptions
-          options={['Good', 'Neutral', 'Bad']}
-          onLeaveFeedback={this.onLeaveFeedback}
+  return (
+    <Section title="Please, leave your Feedback">
+      <FeedbackOptions
+        // options={('good', 'neutral', 'bad')}
+        onLeaveFeedback={onLeaveFeedback}
+      />
+      {countTotalFeedback() === 0 ? (
+        <p className={css.massege}>No feedback given</p>
+      ) : (
+        <Statistics
+          good={good}
+          bad={bad}
+          neutral={neutral}
+          total={countTotalFeedback()}
+          positivePercentage={countPositiveFeedbackPercentage()}
         />
-        {this.countTotalFeedback() === 0 ? (
-          <p className={css.massege}>No feedback given</p>
-        ) : (
-          <Statistics
-            good={good}
-            bad={bad}
-            neutral={neutral}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
-          />
-        )}
-      </Section>
-    );
-  }
+      )}
+    </Section>
+  );
 }
